@@ -1,6 +1,7 @@
-import { AlignLeft } from 'lucide-react';
+import { AlignLeft, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-// Using actual physical page mapping. Bia is page 1, TableContent is 2, page_001 is 3.
+// Using actual physical page mapping
 const TOC_DATA = [
   { title: "Bìa Sổ Tay", page: 1, level: 1 },
   { title: "Mục Lục", page: 2, level: 1 },
@@ -19,36 +20,63 @@ const TOC_DATA = [
   { title: "8. Kỷ luật", page: 31, level: 2 },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  show: { opacity: 1, x: 0 }
+};
+
 export default function TableOfContents({ onJumpToPage, currentPage, onClose }) {
   return (
-    <nav className="h-full flex flex-col p-4 bg-white/90 backdrop-blur-md">
-      <div className="flex items-center gap-2 mb-6 pb-2 border-b border-gray-200">
-        <AlignLeft size={20} className="text-red-600" />
-        <h2 className="font-bold text-sm uppercase tracking-wide text-gray-800">Mục lục</h2>
+    <nav className="h-full flex flex-col p-6 bg-white/80 backdrop-blur-xl">
+      <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-slate-100">
+        <div className="p-2 bg-red-100 rounded-xl text-red-600">
+          <AlignLeft size={20} strokeWidth={3} />
+        </div>
+        <h2 className="font-extrabold text-sm uppercase tracking-widest text-slate-800">Mục lục</h2>
       </div>
-      <ul className="space-y-2 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+      
+      <motion.ul 
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="space-y-1.5 flex-1 overflow-y-auto pr-2 custom-scrollbar pb-10"
+      >
         {TOC_DATA.map((item, i) => (
-          <li key={i}>
+          <motion.li key={i} variants={itemVariants}>
             <button
               onClick={() => {
                 onJumpToPage(item.page);
                 if (onClose) onClose();
               }}
-              className={`w-full text-left py-2 px-3 rounded-xl transition-all duration-200 flex items-center gap-3
-                ${item.level === 1 ? 'font-bold text-gray-800 mt-2 text-[14px]' : 'pl-6 text-gray-600 text-[13.5px]'}
+              className={`w-full text-left py-2.5 px-3 rounded-2xl transition-all duration-300 flex items-center gap-3 group
+                ${item.level === 1 ? 'mt-4 first:mt-0 font-bold text-slate-800 text-[14px]' : 'pl-6 text-slate-600 font-medium text-[13.5px]'}
                 ${currentPage === item.page 
-                  ? 'bg-red-50 text-red-700 shadow-sm border border-red-100 font-semibold' 
-                  : 'hover:bg-slate-100 hover:text-red-600'}
+                  ? 'bg-red-50/80 text-red-600 shadow-sm border border-red-100/50 scale-[1.02]' 
+                  : 'hover:bg-slate-100/50 hover:text-red-500 hover:scale-[1.01] hover:pl-4'}
               `}
             >
-              <div className={`shrink-0 w-6 text-center text-xs ${currentPage === item.page ? 'text-red-500 font-bold' : 'text-gray-400 font-medium'}`}>
+              <div className={`shrink-0 w-7 h-7 flex items-center justify-center rounded-lg text-xs transition-colors
+                ${currentPage === item.page ? 'bg-red-500 text-white font-black shadow-md' : 'bg-slate-100 text-slate-400 font-bold group-hover:bg-red-100 group-hover:text-red-500'}`}>
                 {item.page}
               </div>
-              <span className="leading-snug">{item.title}</span>
+              <span className="leading-snug flex-1">{item.title}</span>
+              
+              <ArrowRight size={14} className={`shrink-0 transition-transform duration-300
+                ${currentPage === item.page ? 'text-red-500 translate-x-0 opacity-100' : 'text-slate-300 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'}`} />
             </button>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </nav>
   );
 }
