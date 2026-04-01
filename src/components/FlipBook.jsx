@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 
 const Page = forwardRef(({ url, pageNum }, ref) => (
@@ -21,7 +21,7 @@ const Page = forwardRef(({ url, pageNum }, ref) => (
 ));
 Page.displayName = 'Page';
 
-export default function FlipBook({ pages, onPageChange, flipRef, width, height }) {
+const FlipBook = React.memo(({ pages, onPageChange, flipRef, width, height }) => {
   return (
     <div className="flex items-center justify-center w-full h-full perspective-1000">
       <HTMLFlipBook
@@ -44,4 +44,12 @@ export default function FlipBook({ pages, onPageChange, flipRef, width, height }
       </HTMLFlipBook>
     </div>
   );
-}
+}, (prev, next) => {
+  return prev.width === next.width && 
+         prev.height === next.height && 
+         prev.pages.length === next.pages.length;
+});
+
+FlipBook.displayName = 'FlipBook';
+
+export default FlipBook;

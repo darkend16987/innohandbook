@@ -64,8 +64,8 @@ export default function TableOfContents({ onJumpToPage, currentPage, onClose }) 
           <motion.li key={i} variants={itemVariants}>
             <button
               onClick={() => {
-                onJumpToPage(item.page);
                 if (onClose) onClose();
+                setTimeout(() => onJumpToPage(item.page), 300);
               }}
               className={`w-full text-left py-3 px-4 rounded-2xl transition-all duration-300 flex items-center gap-3 group
                 ${item.level === 1 ? 'mt-6 first:mt-0 font-bold text-slate-800 text-[15px]' : 'pl-6 text-slate-600 font-medium text-[14px]'}

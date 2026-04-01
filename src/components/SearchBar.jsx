@@ -82,8 +82,8 @@ export default function SearchBar({ searchIndex, onJumpToPage }) {
                 transition={{ delay: i * 0.03 }}
                 key={`${r.page}-${i}`}
                 onClick={() => {
-                  onJumpToPage(r.page);
                   setIsOpen(false);
+                  setTimeout(() => onJumpToPage(r.page), 250);
                 }}
                 className="w-full text-left px-5 py-3 hover:bg-red-50 focus:bg-red-50 rounded-2xl transition-colors outline-none group flex flex-col gap-1.5"
               >
