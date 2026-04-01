@@ -65,7 +65,7 @@ export default function Home() {
 
   return (
     <div 
-      className="min-h-screen flex flex-col relative overflow-hidden font-sans"
+      className="min-h-screen flex flex-col relative overflow-hidden"
       style={{
         backgroundColor: '#ebd9c8',
         backgroundImage: 'url("https://www.transparenttextures.com/patterns/wood-pattern.png")'
@@ -73,21 +73,21 @@ export default function Home() {
     >
       
       {/* Playful background blobs */}
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-red-100 rounded-full blur-[100px] opacity-60 pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-yellow-100 rounded-full blur-[120px] opacity-50 pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-red-100 rounded-full blur-[100px] opacity-60 pointer-events-none animate-blob1" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[50%] bg-yellow-100 rounded-full blur-[120px] opacity-50 pointer-events-none animate-blob2" />
 
       {/* Header */}
       <header className="px-4 md:px-6 py-4 flex items-center justify-between gap-3 z-20 sticky top-0">
         <div className="flex items-center gap-4 flex-1">
           <button 
             onClick={() => setShowToc(!showToc)} 
-            className="p-2.5 bg-white border border-gray-200 text-gray-700 rounded-xl hard-shadow hover:bg-gray-50 flex items-center gap-2 group transition-all"
+            className="p-2.5 bg-white/95 backdrop-blur-md border border-gray-200 text-gray-700 rounded-xl hard-shadow hover:bg-white flex items-center gap-2 group transition-all relative z-50"
           >
             <Menu size={20} className="group-hover:text-red-600 transition-colors" />
             <span className="hidden sm:inline font-bold text-sm">Mục Lục</span>
           </button>
           
-          <div className="hidden md:flex items-center gap-3 ml-4">
+          <div className="hidden md:flex items-center gap-3 ml-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-2xl hard-shadow-sm border border-white/50">
             <div className="h-8 md:h-10 flex items-center justify-center">
               <img src="/logo.svg" alt="INNO Logo" className="h-full w-auto object-contain" />
             </div>
@@ -119,7 +119,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-30"
+              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40"
               onClick={() => setShowToc(false)}
             />
           )}
@@ -131,8 +131,8 @@ export default function Home() {
               initial={{ x: -400, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -400, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 md:top-6 left-0 h-full md:h-[calc(100%-3rem)] w-[280px] bg-white/90 backdrop-blur-xl border-r md:border border-gray-200 shadow-2xl z-40 md:rounded-r-2xl shrink-0"
+              transition={{ type: "spring", stiffness: 350, damping: 35 }}
+              className="fixed top-0 left-0 h-full w-[360px] bg-white border-r border-gray-200 shadow-[20px_0_40px_rgba(0,0,0,0.1)] z-50 shrink-0"
             >
               <TableOfContents onJumpToPage={jumpToPage} currentPage={currentPage} onClose={() => setShowToc(false)} />
             </motion.aside>
