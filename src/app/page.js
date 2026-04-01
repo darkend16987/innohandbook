@@ -88,15 +88,8 @@ export default function Home() {
           </button>
           
           <div className="hidden md:flex items-center gap-3 ml-4">
-            {/* Logo placeholder - replace /logo.png with the actual logo file */}
-            <div className="h-10 flex items-center justify-center">
-              <img src="/logo.png" alt="INNO Logo" className="h-full object-contain" onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }} />
-              <div className="hidden h-10 px-4 bg-gray-200 border-2 border-dashed border-gray-400 text-gray-500 font-bold items-center justify-center rounded-lg text-xs">
-                [LOGO]
-              </div>
+            <div className="h-8 md:h-10 flex items-center justify-center">
+              <img src="/logo.svg" alt="INNO Logo" className="h-full w-auto object-contain" />
             </div>
             
             <div className="w-px h-10 bg-gray-300/80 mx-2 rotate-12"></div>
