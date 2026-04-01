@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    
+    --inno-red: #da2a2a;
+    --inno-red-dark: #b91c1c;
+    --inno-yellow: #facc15;
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-slate-900/70 backdrop-blur-md border border-slate-700/50 shadow-xl text-white;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(218, 42, 42, 0.4);
+  }
+}
+
+body {
+  color: var(--foreground);
+  overflow: hidden; /* Prevent body scroll, everything handled inside */
+}
+
+/* Custom scrollbar for TOC and Search Results */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hard Shadows for playful look */
+.hard-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+.hard-shadow:hover {
+  box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.15);
+  transform: translate(-2px, -2px);
+}
+.hard-shadow:active {
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.2);
+  transform: translate(2px, 2px);
+}
+
+/* Page styles for react-pageflip */
+.flip-page {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.flip-page-hard {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
